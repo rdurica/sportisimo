@@ -1,6 +1,6 @@
 {
   "name": "rdurica/sportisimo",
-  "description": "Sportisimo web app",
+  "description": "Sportisimo web App",
   "keywords": [
     "nette"
   ],
@@ -34,15 +34,15 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "app"
+      "App\\": "App"
     }
   },
   "minimum-stability": "stable",
   "config": {
   },
   "scripts": {
-    "phpcs": "./vendor/bin/phpcs --standard=PSR12 app/",
-    "phpcbf": "./vendor/bin/phpcbf --standard=PSR12 app/",
+    "phpcs": "./vendor/bin/phpcs --standard=PSR12 App/",
+    "phpcbf": "./vendor/bin/phpcbf --standard=PSR12 App/",
     "post-install-cmd": [
       "./vendor/bin/phpcs --config-set colors 1",
       "./vendor/bin/phpcs --config-set report_width 140"

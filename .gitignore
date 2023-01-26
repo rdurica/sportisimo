@@ -11,3 +11,6 @@ Thumbs.db
 *.idea
 *.vscode
 src/vendor
+build/db_data
+src/temp
+src/log

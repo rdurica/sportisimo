@@ -7,15 +7,15 @@
 ## Requirements checklist
 
 - [x] Environment & preparation
-- [ ] Database design
+- [x] Database design
 - [ ] Brand form
-    - [ ] Add
+    - [x] Add
     - [ ] Edit (Modal)
-- [ ] Grid component
+- [x] Grid component
     - [ ] Paginator + set items per page
     - [ ] Sorting (ASC/DESC)
-- [ ] Actions
-    - [ ] Delete brand
+- [x] Actions
+    - [x] Delete brand
 - [ ] Frontend
     - [ ] Layout & Setup (npm / CDN)
     - [ ] Customization

@@ -4,6 +4,9 @@ search:
 		classes:
 			- *Factory
 			- *Facade
+			- *Manager
+			- I*Grid
+			- I*Form
 
 services:
 	- App\Router\RouterFactory::createRouter
