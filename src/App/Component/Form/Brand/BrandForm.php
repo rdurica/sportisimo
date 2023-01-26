@@ -8,11 +8,12 @@ use App\Component\Component;
 use App\Model\Manager\BrandManager;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\UI\Form;
+use Nette\Security\User;
 use Nette\Utils\ArrayHash;
 
 class BrandForm extends Component
 {
-    public function __construct(public ?int $id, private readonly BrandManager $brandManager)
+    public function __construct(public ?int $id, private User $user, private readonly BrandManager $brandManager)
     {
     }
 
@@ -33,7 +34,7 @@ class BrandForm extends Component
 
     public function onFormSucceed(Form $form, ArrayHash $values): RedirectResponse
     {
-        $this->brandManager->add($values->title);
+        $this->brandManager->add($values->title, $this->user->id);
         $this->getPresenter()->flashMessage("Značka {$values->title} úspěšne přidána");
         $this->getPresenter()->redirect("this");
     }

@@ -19,11 +19,11 @@ class BrandManager extends Manager
         return $this->db->table("brand");
     }
 
-    public function add(string $title): void
+    public function add(string $title, int $userId): void
     {
         $this->getTable()->insert([
             "title" => $title,
-            "created_by" => 1,
+            "created_by" => $userId,
         ]);
     }
 }
