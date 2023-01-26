@@ -1,6 +1,6 @@
 {snippet grid}
     <table>
-        <thead class="grey lighten-2">
+        <thead class="grey lighten-3">
         <tr>
             <th>Název <i class="fa-solid fa-arrow-up"></i> <i class="fa-solid fa-arrow-down"></i></th>
             <th>Akce</th>
@@ -17,4 +17,9 @@
         {/foreach}
         </tbody>
     </table>
+    {foreach $paginator->getItemsPerPageOption() as $paginatorOption}
+        {dump $paginatorOption}
+        <a n:href="SetItemsPerPage!, $paginatorOption"
+                class="waves-effect btn-flat">{$paginatorOption}</a>
+    {/foreach}
 {/snippet}
