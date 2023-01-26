@@ -6,7 +6,7 @@ namespace App\Component;
 
 use Nette\Application\UI\Control;
 
-abstract class AbstractComponent extends Control
+abstract class Component extends Control
 {
     abstract public function render(): void;
 }

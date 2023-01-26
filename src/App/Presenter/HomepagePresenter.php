@@ -8,6 +8,7 @@ use App\Component\Form\Brand\BrandForm;
 use App\Component\Form\Brand\IBrandForm;
 use App\Component\Grid\Brand\BrandGrid;
 use App\Component\Grid\Brand\IBrandGrid;
+use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\UI\Presenter;
 use Nette\DI\Attributes\Inject;
 
@@ -19,18 +20,31 @@ final class HomepagePresenter extends Presenter
     #[Inject]
     public IBrandForm $brandForm;
 
+    protected function startup(): void
+    {
+        parent::startup();
+        if (!$this->getUser()->isLoggedIn()) {
+            $this->redirect("Auth:Login");
+        }
+    }
 
-    public function createComponentBrandGrid(): BrandGrid
+    protected function createComponentBrandGrid(): BrandGrid
     {
         return $this->brandGrid->create();
     }
 
-    public function createComponentBrandForm(): BrandForm
+    protected function createComponentBrandForm(): BrandForm
     {
         return $this->brandForm->create(null);
     }
 
-    public function renderDefault(): void
+    protected function renderDefault(): void
     {
+    }
+
+    protected function actionLogOut(): RedirectResponse
+    {
+        $this->getUser()->logout(true);
+        $this->redirect("Auth:Login");
     }
 }

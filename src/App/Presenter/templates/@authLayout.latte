@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>{ifset title}{include title|stripHtml} | {/ifset}Sportisimo</title>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-4">Login</h5>
+            <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type} d-flex align-items-center"
+                                                role="alert">
+                <div>
+                    {$flash->message}
+                </div>
+            </div>
+            {include content}
+        </div>
+    </div>
+
+</div>
+{block scripts}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
+    <script>
+        M.AutoInit();
+    </script>
+{/block}
+</body>
+</html>

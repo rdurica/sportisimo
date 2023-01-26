@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Component\Grid\Brand;
 
-use App\Component\AbstractComponent;
+use App\Component\Component;
 use App\Model\Manager\BrandManager;
 use JetBrains\PhpStorm\NoReturn;
 
-class BrandGrid extends AbstractComponent
+class BrandGrid extends Component
 {
     public function __construct(
         private readonly BrandManager $brandManager

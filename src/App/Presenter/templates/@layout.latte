@@ -16,7 +16,7 @@
     <div class="nav-wrapper blue darken-3">
         <a href="#" class="brand-logo">SRP</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="">Odhlásit (Admin)</a></li>
+            <li><a n:href="LogOut">Odhlásit ({$user->getIdentity()->getData()[username]})</a></li>
         </ul>
     </div>
     <div class="nav-content light-blue darken-1">

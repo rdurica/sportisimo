@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Component\Form\Brand;
 
-use App\Component\AbstractComponent;
+use App\Component\Component;
 use App\Model\Manager\BrandManager;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
 
-class BrandForm extends AbstractComponent
+class BrandForm extends Component
 {
     public function __construct(public ?int $id, private readonly BrandManager $brandManager)
     {
