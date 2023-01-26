@@ -4,6 +4,11 @@
 [![Docker](https://img.shields.io/badge/Docker-powered-blue.svg)](https://www.docker.com/)
 [![composer](https://img.shields.io/badge/composer-latest-green.svg)](https://getcomposer.org/)
 
+## Overview
+
+- Translations are not implemented
+- Contains simple authentication without registration(Credentials will be provided)
+
 ## Requirements checklist
 
 - [x] Environment & preparation
@@ -13,7 +18,7 @@
     - [ ] Edit (Modal)
 - [x] Grid component
     - [ ] Paginator + set items per page
-    - [ ] Sorting (ASC/DESC)
+    - [x] Sorting (ASC/DESC)
 - [x] Actions
     - [x] Delete brand
 - [ ] Frontend

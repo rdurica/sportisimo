@@ -2,7 +2,10 @@
     <table>
         <thead class="grey lighten-3">
         <tr>
-            <th>Název <i class="fa-solid fa-arrow-up"></i> <i class="fa-solid fa-arrow-down"></i></th>
+            {*            {App\Util\SortingType::ASC}*}
+            <th>Název
+                <a n:href="sortASC!" ><span class="material-icons md-18">arrow_downward</span></a>
+                <a n:href="sortDESC!" ><span class="material-icons md-18">arrow_upward</span></a>
             <th>Akce</th>
         </tr>
         </thead>
