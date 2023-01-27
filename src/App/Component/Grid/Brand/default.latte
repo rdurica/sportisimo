@@ -1,29 +1,30 @@
-{snippet grid}
-    <table>
-        <thead class="grey lighten-3">
+<span n:snippet="grid">
+
+
+<table>
+    <thead class="grey lighten-3">
+    <tr>
+        <th style="width: 90%">Název
+            <a n:href="sortASC!" class="ajax"><span class="material-icons md-18">arrow_downward</span></a>
+            <a n:href="sortDESC!" class="ajax"><span class="material-icons md-18">arrow_upward</span></a>
+        <th>Akce</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {foreach $data as $row}
         <tr>
-            <th style="width: 90%">Název
-                <a n:href="sortASC!" ><span class="material-icons md-18">arrow_downward</span></a>
-                <a n:href="sortDESC!" ><span class="material-icons md-18">arrow_upward</span></a>
-            <th>Akce</th>
+            <td>{$row->title}</td>
+            <td><a href="">Edit</a> <a n:href="Delete! $row->id, $row->title" class="ajax">Delete</a>
+            </td>
         </tr>
-        </thead>
-
-        <tbody>
-        {foreach $data as $row}
-            <tr>
-                <td>{$row->title}</td>
-                <td><a href="">Edit</a> <a n:href="Delete! $row->id, $row->title">Delete</a>
-                </td>
-            </tr>
-        {/foreach}
-        </tbody>
-    </table>
+    {/foreach}
+    </tbody>
+</table>
 
 
-    {include "_items_per_page.latte"}
-    <br>
-    {include "_paginator.latte"}
+{include "_items_per_page.latte"}
+<br>
+{include "_paginator.latte"}
+</span>
 
-
-{/snippet}

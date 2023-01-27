@@ -14,3 +14,4 @@ src/vendor
 build/db_data
 src/temp
 src/log
+src/node_modules

@@ -9,7 +9,6 @@ use App\Model\Manager\BrandManager;
 use App\Util\Paginator;
 use App\Util\Sorter;
 use App\Util\SortingType;
-use JetBrains\PhpStorm\NoReturn;
 use Nette\Http\Session;
 
 class BrandGrid extends Component
@@ -60,44 +59,53 @@ class BrandGrid extends Component
         $this->session->getSection('grid')->set("paginator", $this->paginator);
     }
 
-    #[NoReturn] public function handleDelete(int $id, string $title)
+    public function handleDelete(int $id, string $title): void
     {
         $this->brandManager->deleteById($id);
+        $this->redrawControl();
     }
 
-    public function handleSetItemsPerPage(int $count)
+    public function handleSetItemsPerPage(int $count): void
     {
         $this->paginator->setItemsPerPage($count);
         $this->savePaginator();
+        $this->redrawControl();
     }
 
-    public function handleSetPage(int $page)
+    public function handleSetPage(int $page): void
     {
         $this->paginator->setPage($page);
         $this->savePaginator();
+        $this->redrawControl();
     }
 
-    public function handleSetNext()
+    public function handleSetNext(): void
     {
-        $this->paginator->setPage($this->paginator->getPage() + 1);
-        $this->savePaginator();
-        $this->getPresenter()->redirect("this");
+        if (!$this->paginator->isLastPage()) {
+            $this->paginator->setPage($this->paginator->getPage() + 1);
+            $this->savePaginator();
+            $this->redrawControl();
+        }
     }
 
-    public function handleSetPrevious()
+    public function handleSetPrevious(): void
     {
-        $this->paginator->setPage($this->paginator->getPage() - 1);
-        $this->savePaginator();
-        $this->getPresenter()->redirect("this");
+        if (!$this->paginator->isFirstPage()) {
+            $this->paginator->setPage($this->paginator->getPage() - 1);
+            $this->savePaginator();
+            $this->redrawControl();
+        }
     }
 
-    public function handleSortASC()
+    public function handleSortASC(): void
     {
         $this->sorter->setSorting(SortingType::ASC);
+        $this->redrawControl();
     }
 
-    public function handleSortDESC()
+    public function handleSortDESC(): void
     {
         $this->sorter->setSorting(SortingType::DESC);
+        $this->redrawControl();
     }
 }

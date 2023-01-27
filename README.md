@@ -8,6 +8,7 @@
 
 - Translations are not implemented
 - Contains simple authentication without registration(Credentials will be provided)
+- Paginator is saved into session (cross grid related)
 
 ## Requirements checklist
 
@@ -17,7 +18,7 @@
     - [x] Add
     - [ ] Edit (Modal)
 - [x] Grid component
-    - [ ] Paginator + set items per page
+    - [x] Paginator + set items per page
     - [x] Sorting (ASC/DESC)
 - [x] Actions
     - [x] Delete brand
