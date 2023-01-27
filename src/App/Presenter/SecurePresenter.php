@@ -8,7 +8,6 @@ use Nette\Application\UI\Presenter;
 
 abstract class SecurePresenter extends Presenter
 {
-
     protected function startup(): void
     {
         parent::startup();
@@ -16,5 +15,4 @@ abstract class SecurePresenter extends Presenter
             $this->redirect("Auth:Login");
         }
     }
-
 }

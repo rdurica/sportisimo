@@ -19,8 +19,11 @@
         {/foreach}
         </tbody>
     </table>
-    {foreach $paginator->getItemsPerPageOption() as $paginatorOption}
-        <a n:href="SetItemsPerPage!, $paginatorOption"
-                class="waves-effect btn-flat">{$paginatorOption}</a>
-    {/foreach}
+
+
+    {include "_items_per_page.latte"}
+    <br>
+    {include "_paginator.latte"}
+
+
 {/snippet}

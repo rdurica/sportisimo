@@ -26,8 +26,7 @@ class BrandGrid extends Component
         $this->sorter = $this->session->getSection('grid')->get("sorter");
         if (!$this->paginator) {
             $paginator = new Paginator();
-            $paginator->setPage(1)
-                ->setItemsPerPage(10);
+            $paginator->setTotalItems((int)ceil($this->brandManager->getTable()->count()));
 
             $this->session->getSection('grid')->set("paginator", $paginator);
             $this->paginator = $paginator;
@@ -43,14 +42,22 @@ class BrandGrid extends Component
     {
         $this->getTemplate()->setFile(__DIR__ . "/default.latte");
         $this->getTemplate()->paginator = $this->paginator;
+        $this->paginator->setTotalItems($this->brandManager->getTable()->count());
+        $totalPages = $this->paginator->getTotalPages();
         $this->getTemplate()->data = $this->brandManager->getTable()
             ->order("title {$this->sorter->getSorting()}")
             ->page(
-                1,
+                $this->paginator->getPage(),
                 $this->paginator->getItemsPerPage(),
-                $itemsPerPage
+                $totalPages,
             );
+        $this->savePaginator();
         $this->getTemplate()->render();
+    }
+
+    private function savePaginator()
+    {
+        $this->session->getSection('grid')->set("paginator", $this->paginator);
     }
 
     #[NoReturn] public function handleDelete(int $id, string $title)
@@ -61,6 +68,27 @@ class BrandGrid extends Component
     public function handleSetItemsPerPage(int $count)
     {
         $this->paginator->setItemsPerPage($count);
+        $this->savePaginator();
+    }
+
+    public function handleSetPage(int $page)
+    {
+        $this->paginator->setPage($page);
+        $this->savePaginator();
+    }
+
+    public function handleSetNext()
+    {
+        $this->paginator->setPage($this->paginator->getPage() + 1);
+        $this->savePaginator();
+        $this->getPresenter()->redirect("this");
+    }
+
+    public function handleSetPrevious()
+    {
+        $this->paginator->setPage($this->paginator->getPage() - 1);
+        $this->savePaginator();
+        $this->getPresenter()->redirect("this");
     }
 
     public function handleSortASC()

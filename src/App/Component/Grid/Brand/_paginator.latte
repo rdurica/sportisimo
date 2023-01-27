@@ -1,0 +1,21 @@
+<ul class="pagination">
+    {if $paginator->isFirstPage()}
+        <li class="disabled"><i class="material-icons">chevron_left</i></li>
+    {else}
+        <li><a n:href="SetPrevious!"><i class="material-icons">chevron_left</i></a></li>
+    {/if}
+        {foreach $paginator->getPaginatorOptions() as $page}
+        <li class="waves-effect {if $paginator->getPage() == $page} active {/if}">
+            {if $page != '...'}
+            <a n:href="SetPage!, $page">{$page}</a>
+            {else}
+        <li class="disabled"><a href="#!">{$page}</a></li>
+    {/if}
+        </li>
+    {/foreach}
+        {if $paginator->isLastPage()}
+        <li class="disabled"><i class="material-icons">chevron_right</i></li>
+    {else}
+        <li><a n:href="SetNext!"><i class="material-icons">chevron_right</i></a></li>
+    {/if}
+</ul>
