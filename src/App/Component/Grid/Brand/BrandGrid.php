@@ -130,5 +130,4 @@ class BrandGrid extends Component
 
         $this->redrawControl();
     }
-
 }

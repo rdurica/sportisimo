@@ -10,13 +10,10 @@
 <body>
 {include "_navbar.latte"}
 
-
-
-
 <div class="container" style="margin-top: 10px">
         <div class="row">
             <div class="col s12">
-                <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+                <div n:foreach="$flashes as $flash" class="card-panel {$flash->type}">{$flash->message}</div>
                 {include content}
             </div>
         </div>

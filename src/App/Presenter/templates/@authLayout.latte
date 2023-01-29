@@ -7,23 +7,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>{ifset title}{include title|stripHtml} | {/ifset}Sportisimo</title>
 </head>
-
 <body>
-<div class="container">
 
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title text-center mb-4">Login</h5>
-            <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type} d-flex align-items-center"
-                                                role="alert">
-                <div>
+<div class="section">
+    <div class="container">
+        <h1 class="header center blue-text">Sportisimo</h1>
+        <div class="row center">
+            <div class="col s6 offset-s3">
+                <div n:foreach="$flashes as $flash" class="red-text d-flex align-items-center">
                     {$flash->message}
                 </div>
+                {include content}
             </div>
-            {include content}
         </div>
     </div>
-
 </div>
 {block scripts}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

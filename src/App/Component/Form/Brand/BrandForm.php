@@ -33,8 +33,7 @@ class BrandForm extends Component
         $form->addText("title", "Název značky")
             ->setRequired("Zadejte prosím název značky")
             ->setMaxLength(50);
-        $form->addSubmit("save", "Uložit")
-            ->setHtmlAttribute("class", "waves-effect waves-green btn-flat");
+        $form->addSubmit("save", "Uložit");
 
         $brand = $this->brandManager->getTable()->get(
             $this->session->getSection(Sportisimo::SESSION_FORM)->get(Sportisimo::SECTION_ID)
@@ -52,9 +51,9 @@ class BrandForm extends Component
     {
         try {
             $this->brandManager->save($values->title, $this->user->id, $this->id);
-            $this->getPresenter()->flashMessage("Značka {$values->title} uložena");
+            $this->getPresenter()->flashMessage("Značka {$values->title} uložena", Sportisimo::FLASH_SUCCESS);
         } catch (UniqueConstraintViolationException $ex) {
-            $this->getPresenter()->flashMessage("Značka {$values->title} již existuje");
+            $this->getPresenter()->flashMessage("Značka {$values->title} již existuje", Sportisimo::FLASH_DANGER);
         }
 
         $this->session->getSection(Sportisimo::SESSION_FORM)->remove(Sportisimo::SECTION_ID);

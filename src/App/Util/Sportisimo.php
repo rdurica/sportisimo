@@ -21,4 +21,10 @@ class Sportisimo
     public const SECTION_ID = "id";
     public const SECTION_SORTER = "sorter";
     public const SECTION_PAGINATOR = "paginator";
+
+    /**
+     * Flashes
+     */
+    public const FLASH_SUCCESS = "green white-text";
+    public const FLASH_DANGER = "red white-text";
 }

@@ -6,7 +6,7 @@
     {/if}
 
     {foreach $paginator->getPaginatorOptions() as $page}
-    <li class="waves-effect {if $paginator->getPage() == $page} active {/if}">
+    <li class="waves-effect {if $paginator->getPage() == $page} active blue{/if}">
         {if $page != '...'}
             <a n:href="SetPage!, $page" class="ajax">{$page}</a>
         {else}

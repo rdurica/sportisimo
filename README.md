@@ -15,6 +15,12 @@ For this project no additional libraries were used (Except CodeSniffer for code 
 - Database credentials (username: root, password: password)
 - App credentials (username: Administrator, password: password)
 
+## Preview
+
+<img width="1321" alt="Screenshot 2023-01-29 at 23 45 45" src="https://user-images.githubusercontent.com/16089770/215360052-03aed58f-f42b-4bb7-ae5d-29fb2b276afa.png">
+<img width="1435" alt="Screenshot 2023-01-30 at 0 15 38" src="https://user-images.githubusercontent.com/16089770/215361220-1ba6c9f3-45fb-48a7-9cff-28709f2fd159.png">
+<img width="1435" alt="Screenshot 2023-01-30 at 0 18 30" src="https://user-images.githubusercontent.com/16089770/215361366-238f07a0-c4ef-4d59-a80b-b24838a190a4.png">
+
 ## Installation (Using docker-compose)
 
 Application is shipped with created docker image. Used commands are for linux/mac users.

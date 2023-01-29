@@ -23,14 +23,10 @@ final class LoginForm extends Component
     {
         $form = new Form();
         $form->addText("username", "Uživatelské jméno")
-            ->setRequired()
-            ->setHtmlAttribute("class", "form-control")
-            ->setHtmlAttribute("id", "floatingInput");
+            ->setRequired();
         $form->addPassword("password", "Heslo")
-            ->setRequired()
-            ->setHtmlAttribute("class", "form-control");
-        $form->addSubmit("login", "Pŕihlásit")
-            ->setHtmlAttribute("class", "w-100 btn btn-lg btn-primary");
+            ->setRequired();
+        $form->addSubmit("login", "Přihlásit");
 
         $form->onSuccess[] = [$this, "formSucceeded"];
 

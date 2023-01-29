@@ -2,25 +2,29 @@
 <table>
     <thead class="grey lighten-3">
     <tr>
-        <th style="width: 90%">Název
+        <th style="width: 80%">Název
             <a n:href="sort!, 'ASC'" class="ajax"><span class="material-icons md-18">arrow_downward</span></a>
             <a n:href="sort!, 'DESC'" class="ajax"><span class="material-icons md-18">arrow_upward</span></a>
-        <th>Akce</th>
+        <th class="center">Akce</th>
     </tr>
     </thead>
     <tbody>
     {foreach $data as $row}
         <tr>
             <td>{$row->title}</td>
-            <td>
-                <a onclick="showEditForm({$row->id}, {$row->title})" style="cursor: pointer;">Edit</a>
-                <a n:href="Delete! $row->id" class="ajax">Delete</a>
+            <td class="center">
+                <a n:href="Delete! $row->id" class="ajax grey-text">Smazat</a>
+                <a onclick="showEditForm({$row->id}, {$row->title})" style="cursor: pointer;"
+                   class="grey-text">Editovat</a>
             </td>
         </tr>
     {/foreach}
     </tbody>
 </table>
-{include "_items_per_page.latte"}
-<br>
-{include "_paginator.latte"}
+    <div class="row center">
+        <div class="col s6 offset-s3 center">
+        {include "_paginator.latte"}
+        {include "_items_per_page.latte"}
+        </div>
+    </div>
 </span>

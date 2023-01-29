@@ -72,7 +72,8 @@ class Paginator
 
     public function getTotalPages(): int
     {
-        return intval(ceil($this->totalItems / $this->itemsPerPage));
+        $totalPages = intval(ceil($this->totalItems / $this->itemsPerPage));
+        return $totalPages === 0 ? 1 : $totalPages;
     }
 
     public function getPage(): int
