@@ -6,9 +6,9 @@ namespace App\Component\Form\Brand;
 
 use App\Component\Component;
 use App\Model\Manager\BrandManager;
-use JetBrains\PhpStorm\NoReturn;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\UI\Form;
+use Nette\Database\UniqueConstraintViolationException;
 use Nette\Http\Session;
 use Nette\Security\User;
 use Nette\Utils\ArrayHash;
@@ -19,7 +19,7 @@ class BrandForm extends Component
 
 
     public function __construct(
-        private User $user,
+        private readonly User $user,
         private readonly BrandManager $brandManager,
         private readonly Session $session,
     ) {
@@ -45,17 +45,16 @@ class BrandForm extends Component
         return $form;
     }
 
-    #[NoReturn] public function onFormSucceed(Form $form, ArrayHash $values): RedirectResponse
+    public function onFormSucceed(Form $form, ArrayHash $values): RedirectResponse
     {
-        if ($this->id) {
-            $this->brandManager->edit($this->id, $values->title, $this->user->id);
-            $this->getPresenter()->flashMessage("Značka {$values->title} úspěšne upravena");
-        } else {
-            $this->brandManager->add($values->title, $this->user->id);
-            $this->getPresenter()->flashMessage("Značka {$values->title} úspěšne přidána");
+        try {
+            $this->brandManager->save($values->title, $this->user->id, $this->id);
+            $this->getPresenter()->flashMessage("Značka {$values->title} uložena");
+        } catch (UniqueConstraintViolationException $exception) {
+            $this->getPresenter()->flashMessage("Značka {$values->title} již existuje");
         }
 
-        $this->session->getSection('form')->set("id", null);
+        $this->session->getSection('form')->remove("id");
         $this->getPresenter()->redirect("this");
     }
 
