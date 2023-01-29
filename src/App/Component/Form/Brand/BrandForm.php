@@ -6,6 +6,7 @@ namespace App\Component\Form\Brand;
 
 use App\Component\Component;
 use App\Model\Manager\BrandManager;
+use App\Util\Sportisimo;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\UI\Form;
 use Nette\Database\UniqueConstraintViolationException;
@@ -23,7 +24,7 @@ class BrandForm extends Component
         private readonly BrandManager $brandManager,
         private readonly Session $session,
     ) {
-        $this->id = $this->session->getSection('form')->get("id");
+        $this->id = $this->session->getSection(Sportisimo::SESSION_FORM)->get(Sportisimo::SECTION_ID);
     }
 
     public function createComponentBrandForm(): Form
@@ -35,7 +36,9 @@ class BrandForm extends Component
         $form->addSubmit("save", "Uložit")
             ->setHtmlAttribute("class", "waves-effect waves-green btn-flat");
 
-        $brand = $this->brandManager->getTable()->get($this->session->getSection('form')->get("id"));
+        $brand = $this->brandManager->getTable()->get(
+            $this->session->getSection(Sportisimo::SESSION_FORM)->get(Sportisimo::SECTION_ID)
+        );
         if ($brand) {
             $form->setDefaults(["title" => $brand->title]);
         }
@@ -50,11 +53,11 @@ class BrandForm extends Component
         try {
             $this->brandManager->save($values->title, $this->user->id, $this->id);
             $this->getPresenter()->flashMessage("Značka {$values->title} uložena");
-        } catch (UniqueConstraintViolationException $exception) {
+        } catch (UniqueConstraintViolationException $ex) {
             $this->getPresenter()->flashMessage("Značka {$values->title} již existuje");
         }
 
-        $this->session->getSection('form')->remove("id");
+        $this->session->getSection(Sportisimo::SESSION_FORM)->remove(Sportisimo::SECTION_ID);
         $this->getPresenter()->redirect("this");
     }
 

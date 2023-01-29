@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Component\Grid\Brand;
 
 use App\Component\Component;
-use App\Component\Form\Brand\BrandForm;
 use App\Model\Manager\BrandManager;
 use App\Util\Paginator;
 use App\Util\Sorter;
 use App\Util\SortingType;
+use App\Util\Sportisimo;
 use Nette\Http\Session;
 
 class BrandGrid extends Component
@@ -21,18 +21,18 @@ class BrandGrid extends Component
         private readonly BrandManager $brandManager,
         private readonly Session $session
     ) {
-        $this->paginator = $this->session->getSection('grid')->get("paginator");
-        $this->sorter = $this->session->getSection('grid')->get("sorter");
+        $this->paginator = $this->session->getSection(Sportisimo::SESSION_GRID)->get(Sportisimo::SECTION_PAGINATOR);
+        $this->sorter = $this->session->getSection(Sportisimo::SESSION_GRID)->get(Sportisimo::SECTION_SORTER);
         if (!$this->paginator) {
             $paginator = new Paginator();
             $paginator->setTotalItems((int)ceil($this->brandManager->getTable()->count()));
 
-            $this->session->getSection('grid')->set("paginator", $paginator);
+            $this->session->getSection(Sportisimo::SESSION_GRID)->set(Sportisimo::SECTION_PAGINATOR, $paginator);
             $this->paginator = $paginator;
         }
         if (!$this->sorter) {
             $this->sorter = new Sorter();
-            $this->session->getSection('grid')->set("sorter", $this->sorter);
+            $this->session->getSection(Sportisimo::SESSION_GRID)->set(Sportisimo::SECTION_SORTER, $this->sorter);
         }
     }
 
@@ -53,17 +53,26 @@ class BrandGrid extends Component
         $this->getTemplate()->render();
     }
 
-    private function savePaginator()
+    /**
+     * Save paginator into session
+     */
+    private function savePaginator(): void
     {
-        $this->session->getSection('grid')->set("paginator", $this->paginator);
+        $this->session->getSection(Sportisimo::SESSION_GRID)->set(Sportisimo::SECTION_PAGINATOR, $this->paginator);
     }
 
+    /**
+     * Delete brand
+     */
     public function handleDelete(int $id): void
     {
         $this->brandManager->deleteById($id);
         $this->redrawControl();
     }
 
+    /**
+     * Set items per page for grid
+     */
     public function handleSetItemsPerPage(int $count): void
     {
         $this->paginator->setItemsPerPage($count);
@@ -71,6 +80,9 @@ class BrandGrid extends Component
         $this->redrawControl();
     }
 
+    /**
+     * Paginate trough pages
+     */
     public function handleSetPage(int $page): void
     {
         $this->paginator->setPage($page);
@@ -78,6 +90,9 @@ class BrandGrid extends Component
         $this->redrawControl();
     }
 
+    /**
+     * Paginate to next page
+     */
     public function handleSetNext(): void
     {
         if (!$this->paginator->isLastPage()) {
@@ -87,6 +102,9 @@ class BrandGrid extends Component
         }
     }
 
+    /**
+     * Paginate to previous page
+     */
     public function handleSetPrevious(): void
     {
         if (!$this->paginator->isFirstPage()) {
@@ -96,24 +114,21 @@ class BrandGrid extends Component
         }
     }
 
-    public function handleSortASC(): void
+    /**
+     * Set sorting order based on title
+     */
+    public function handleSort(string $sortType): void
     {
-        $this->sorter->setSorting(SortingType::ASC);
+        switch ($sortType) {
+            case SortingType::ASC->name:
+                $this->sorter->setSorting(SortingType::ASC);
+                break;
+            case SortingType::DESC->name:
+                $this->sorter->setSorting(SortingType::DESC);
+                break;
+        }
+
         $this->redrawControl();
     }
 
-    public function handleSortDESC(): void
-    {
-        $this->sorter->setSorting(SortingType::DESC);
-        $this->redrawControl();
-    }
-
-    public function createComponentBrandFormEdit(): BrandForm
-    {
-        $form = $this->brandForm->create($this->editId);
-
-        $this->redrawControl();
-
-        return $form;
-    }
 }

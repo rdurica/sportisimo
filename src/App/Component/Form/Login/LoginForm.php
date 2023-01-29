@@ -24,7 +24,8 @@ final class LoginForm extends Component
         $form = new Form();
         $form->addText("username", "Uživatelské jméno")
             ->setRequired()
-            ->setHtmlAttribute("class", "form-control")->setHtmlAttribute("id", "floatingInput");
+            ->setHtmlAttribute("class", "form-control")
+            ->setHtmlAttribute("id", "floatingInput");
         $form->addPassword("password", "Heslo")
             ->setRequired()
             ->setHtmlAttribute("class", "form-control");
@@ -41,7 +42,6 @@ final class LoginForm extends Component
         try {
             $userIdentity = $this->authenticator->authenticate($values->username, $values->password);
             $this->user->login($userIdentity);
-            $this->getPresenter()->flashMessage("OK", "success");
             $this->getPresenter()->redirect("Homepage:");
         } catch (AccountException $ex) {
             $this->getPresenter()->flashMessage(

@@ -25,7 +25,7 @@
 - [ ] Frontend
     - [ ] Layout & Setup (npm / CDN)
     - [ ] Customization
-- [ ] Database migration script
+- [x] Database migration script
 - [ ] Polish final product (readme, error pages ...)
 
 ## License

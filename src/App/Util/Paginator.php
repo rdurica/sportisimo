@@ -6,6 +6,9 @@ namespace App\Util;
 
 class Paginator
 {
+    /**
+     * Available options (Total items per page)
+     */
     private array $itemsPerPageOption = [10, 20, 30];
     private ?int $totalItems;
 
@@ -19,6 +22,9 @@ class Paginator
         return $this->itemsPerPage;
     }
 
+    /**
+     * Set items per page and reset actual page to 1
+     */
     public function setItemsPerPage(int $itemsPerPage): Paginator
     {
         $this->itemsPerPage = $itemsPerPage;
@@ -44,6 +50,9 @@ class Paginator
         return $this->itemsPerPageOption;
     }
 
+    /**
+     * Prepare array of pages which will be rendered
+     */
     public function getPaginatorOptions(): array
     {
         $allPages = range(1, $this->getTotalPages());
@@ -61,12 +70,12 @@ class Paginator
         }
     }
 
-    public function getTotalPages(): float
+    public function getTotalPages(): int
     {
-        return ceil($this->totalItems / $this->itemsPerPage);
+        return intval(ceil($this->totalItems / $this->itemsPerPage));
     }
 
-    public function getPage(): ?int
+    public function getPage(): int
     {
         return $this->page;
     }
@@ -80,7 +89,7 @@ class Paginator
 
     public function isLastPage(): bool
     {
-        return ($this->page == $this->getTotalPages());
+        return ($this->page === $this->getTotalPages());
     }
 
     public function isFirstPage(): bool

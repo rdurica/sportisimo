@@ -22,9 +22,10 @@ class BrandManager extends Manager
     }
 
     /**
+     * Add or edit item
      * @throws UniqueConstraintViolationException
      */
-    public function save(string $title, int $userId, ?int $id = null)
+    public function save(string $title, int $userId, ?int $id = null): void
     {
         $id ? $this->edit($id, $title, $userId) : $this->add($title, $userId);
     }

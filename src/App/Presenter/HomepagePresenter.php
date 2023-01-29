@@ -8,6 +8,7 @@ use App\Component\Form\Brand\BrandForm;
 use App\Component\Form\Brand\IBrandForm;
 use App\Component\Grid\Brand\BrandGrid;
 use App\Component\Grid\Brand\IBrandGrid;
+use App\Util\Sportisimo;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\DI\Attributes\Inject;
 use Nette\Http\Session;
@@ -24,9 +25,12 @@ final class HomepagePresenter extends SecurePresenter
     public Session $session;
 
 
-    public function handleEditId(int $id)
+    /**
+     * Save form id into session for Edit
+     */
+    protected function handleEditId(int $id): void
     {
-        $this->session->getSection('form')->set("id", $id);
+        $this->session->getSection(Sportisimo::SESSION_FORM)->set(Sportisimo::SECTION_ID, $id);
         $this->redrawControl("brandForm");
     }
 

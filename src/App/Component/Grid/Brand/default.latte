@@ -3,19 +3,18 @@
     <thead class="grey lighten-3">
     <tr>
         <th style="width: 90%">Název
-            <a n:href="sortASC!" class="ajax"><span class="material-icons md-18">arrow_downward</span></a>
-            <a n:href="sortDESC!" class="ajax"><span class="material-icons md-18">arrow_upward</span></a>
+            <a n:href="sort!, 'ASC'" class="ajax"><span class="material-icons md-18">arrow_downward</span></a>
+            <a n:href="sort!, 'DESC'" class="ajax"><span class="material-icons md-18">arrow_upward</span></a>
         <th>Akce</th>
     </tr>
     </thead>
-
     <tbody>
     {foreach $data as $row}
         <tr>
             <td>{$row->title}</td>
-            <td><a onclick="showEditForm({$row->id}, {$row->title})" style="cursor: pointer;">Edit</a>
+            <td>
+                <a onclick="showEditForm({$row->id}, {$row->title})" style="cursor: pointer;">Edit</a>
                 <a n:href="Delete! $row->id" class="ajax">Delete</a>
-
             </td>
         </tr>
     {/foreach}

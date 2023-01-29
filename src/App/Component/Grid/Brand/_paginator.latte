@@ -4,16 +4,17 @@
     {else}
         <li><a n:href="SetPrevious!" class="ajax"><i class="material-icons">chevron_left</i></a></li>
     {/if}
-        {foreach $paginator->getPaginatorOptions() as $page}
-        <li class="waves-effect {if $paginator->getPage() == $page} active {/if}">
-            {if $page != '...'}
+
+    {foreach $paginator->getPaginatorOptions() as $page}
+    <li class="waves-effect {if $paginator->getPage() == $page} active {/if}">
+        {if $page != '...'}
             <a n:href="SetPage!, $page" class="ajax">{$page}</a>
-            {else}
-        <li class="disabled"><a href="#!">{$page}</a></li>
-    {/if}
-        </li>
+        {else}
+            <li class="disabled"><a href="#!">{$page}</a></li>
+        {/if}
     {/foreach}
-        {if $paginator->isLastPage()}
+
+    {if $paginator->isLastPage()}
         <li class="disabled"><i class="material-icons">chevron_right</i></li>
     {else}
         <li><a n:href="SetNext!" class="ajax"><i class="material-icons">chevron_right</i></a></li>

@@ -1,4 +1,3 @@
 {foreach $paginator->getItemsPerPageOption() as $paginatorOption}
-    <a n:href="SetItemsPerPage!, $paginatorOption"
-            class="waves-effect btn-flat ajax">{$paginatorOption}</a>
+    <a n:href="SetItemsPerPage!, $paginatorOption" class="waves-effect btn-flat ajax">{$paginatorOption}</a>
 {/foreach}
