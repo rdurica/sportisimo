@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Component\Grid\Brand;
 
 use App\Component\Component;
+use App\Component\Form\Brand\BrandForm;
 use App\Model\Manager\BrandManager;
 use App\Util\Paginator;
 use App\Util\Sorter;
@@ -14,12 +15,11 @@ use Nette\Http\Session;
 class BrandGrid extends Component
 {
     private ?Paginator $paginator;
-
     private ?Sorter $sorter;
 
     public function __construct(
         private readonly BrandManager $brandManager,
-        private readonly Session $session,
+        private readonly Session $session
     ) {
         $this->paginator = $this->session->getSection('grid')->get("paginator");
         $this->sorter = $this->session->getSection('grid')->get("sorter");
@@ -35,7 +35,6 @@ class BrandGrid extends Component
             $this->session->getSection('grid')->set("sorter", $this->sorter);
         }
     }
-
 
     public function render(): void
     {
@@ -59,7 +58,7 @@ class BrandGrid extends Component
         $this->session->getSection('grid')->set("paginator", $this->paginator);
     }
 
-    public function handleDelete(int $id, string $title): void
+    public function handleDelete(int $id): void
     {
         $this->brandManager->deleteById($id);
         $this->redrawControl();
@@ -107,5 +106,14 @@ class BrandGrid extends Component
     {
         $this->sorter->setSorting(SortingType::DESC);
         $this->redrawControl();
+    }
+
+    public function createComponentBrandFormEdit(): BrandForm
+    {
+        $form = $this->brandForm->create($this->editId);
+
+        $this->redrawControl();
+
+        return $form;
     }
 }

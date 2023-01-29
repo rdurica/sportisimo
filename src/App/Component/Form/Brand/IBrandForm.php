@@ -6,5 +6,5 @@ namespace App\Component\Form\Brand;
 
 interface IBrandForm
 {
-    public function create(?int $id): BrandForm;
+    public function create(): BrandForm;
 }

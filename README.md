@@ -14,9 +14,9 @@
 
 - [x] Environment & preparation
 - [x] Database design
-- [ ] Brand form
+- [x] Brand form
     - [x] Add
-    - [ ] Edit (Modal)
+    - [x] Edit (Modal)
 - [x] Grid component
     - [x] Paginator + set items per page
     - [x] Sorting (ASC/DESC)

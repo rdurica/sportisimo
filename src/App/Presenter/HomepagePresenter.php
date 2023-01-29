@@ -10,6 +10,7 @@ use App\Component\Grid\Brand\BrandGrid;
 use App\Component\Grid\Brand\IBrandGrid;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\DI\Attributes\Inject;
+use Nette\Http\Session;
 
 final class HomepagePresenter extends SecurePresenter
 {
@@ -19,6 +20,15 @@ final class HomepagePresenter extends SecurePresenter
     #[Inject]
     public IBrandForm $brandForm;
 
+    #[Inject]
+    public Session $session;
+
+
+    public function handleEditId(int $id)
+    {
+        $this->session->getSection('form')->set("id", $id);
+        $this->redrawControl("brandForm");
+    }
 
     protected function createComponentBrandGrid(): BrandGrid
     {

@@ -1,6 +1,4 @@
-<span n:snippet="grid">
-
-
+<span n:snippet="Grid">
 <table>
     <thead class="grey lighten-3">
     <tr>
@@ -15,16 +13,15 @@
     {foreach $data as $row}
         <tr>
             <td>{$row->title}</td>
-            <td><a href="">Edit</a> <a n:href="Delete! $row->id, $row->title" class="ajax">Delete</a>
+            <td><a onclick="showEditForm({$row->id}, {$row->title})" style="cursor: pointer;">Edit</a>
+                <a n:href="Delete! $row->id" class="ajax">Delete</a>
+
             </td>
         </tr>
     {/foreach}
     </tbody>
 </table>
-
-
 {include "_items_per_page.latte"}
 <br>
 {include "_paginator.latte"}
 </span>
-
