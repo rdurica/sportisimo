@@ -27,8 +27,10 @@ class Paginator
      */
     public function setItemsPerPage(int $itemsPerPage): Paginator
     {
-        $this->itemsPerPage = $itemsPerPage;
-        $this->page = 1;
+        if (in_array($itemsPerPage, $this->itemsPerPageOption)) {
+            $this->itemsPerPage = $itemsPerPage;
+            $this->page = 1;
+        }
 
         return $this;
     }
@@ -83,8 +85,9 @@ class Paginator
 
     public function setPage(int $page): Paginator
     {
-        $this->page = $page;
-
+        if ($page <= $this->getTotalPages() && $page > 0) {
+            $this->page = $page;
+        }
         return $this;
     }
 
